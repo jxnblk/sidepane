@@ -1,7 +1,134 @@
 import React from 'react'
 
-
 const Context = React.createContext()
+
+const toggle = state => ({ paneOpen: !state.paneOpen })
+const close = state => ({ paneOpen: false })
+const open = state => ({ paneOpen: true })
+
+export const Style = ({ css }) =>
+  <style
+    dangerouslySetInnerHTML={{
+      __html: css
+    }}
+  />
+
+export const withSidepane = Component => React.forwardRef((props, ref) => (
+  <Context.Consumer
+    children={context => (
+      <Component
+        {...props}
+        {...context}
+        ref={ref}
+      />
+    )}
+  />
+))
+
+const Root = props =>
+  <div
+    {...props}
+    className='sidepane-root'
+  />
+
+const Pane = withSidepane(({
+  paneOpen,
+  togglePane,
+  closePane,
+  openPane,
+  ...props
+}) => (
+  <div
+    {...props}
+    className='sidepane-pane'
+    style={{
+      ...props.style,
+      transform: paneOpen ? null : 'translateX(-100%)'
+    }}
+  />
+))
+
+const Main = props =>
+  <div
+    {...props}
+    className='sidepane-main'
+  />
+
+const Overlay = props =>
+  <div
+    {...props}
+    className='sidepane-overlay'
+  />
+
+const Spacer = props =>
+  <div
+    {...props}
+    className='sidepane-spacer'
+  />
+
+
+export class Sidepane extends React.Component {
+  state = {
+    paneOpen: false,
+  }
+
+  update = (...args) => this.setState(...args)
+
+  render () {
+    const {
+      open,
+      width = 256,
+      breakpoint = '32em',
+      onClose,
+      children
+    } = this.props
+
+    const { paneOpen } = this.state
+
+    const context = {
+      ...this.state,
+      togglePane: () => {
+        console.log('toggle')
+        this.update(toggle)
+      },
+      closePane: () => this.update(close),
+      openPane: () => this.update(open),
+    }
+
+    const cssLarge = `@media screen and (min-width:${breakpoint}){${css.large}}`
+
+    const styles = [
+      <Style key='base' css={css.base} />,
+      <Style key='desktop' css={cssLarge} />
+    ]
+
+    return (
+      <Context.Provider value={context}>
+        {styles}
+        <Root>
+          {(open || paneOpen) && (
+            <Overlay
+              onClick={e => {
+                if (typeof onClose === 'function') {
+                  onClose(e)
+                } else {
+                  this.update(close)
+                }
+              }}
+            />
+          )}
+          <Pane style={{ width }}>
+            Pane tk
+          </Pane>
+          <Spacer style={{ width }} />
+          <Main>
+            {this.props.children}
+          </Main>
+        </Root>
+      </Context.Provider>
+    )
+  }
+}
 
 const css = {
   base: `
@@ -51,136 +178,4 @@ const css = {
 `
 }
 
-export const Style = ({ css }) =>
-  <style
-    dangerouslySetInnerHTML={{
-      __html: css
-    }}
-  />
-
-const toggle = state => ({ paneOpen: !state.paneOpen })
-const close = state => ({ paneOpen: false })
-const open = state => ({ paneOpen: true })
-
-export class Provider extends React.Component {
-  state = {
-    paneOpen: false,
-  }
-
-  update = (...args) => this.setState(...args)
-
-  render () {
-    const {
-      children,
-      breakpoint = '32em'
-    } = this.props
-    const context = {
-      ...this.state,
-      togglePane: () => {
-        console.log('toggle')
-        this.update(toggle)
-      },
-      closePane: () => this.update(close),
-      openPane: () => this.update(open),
-    }
-    console.log(this.state)
-
-    const cssLarge = `@media screen and (min-width:${breakpoint}){${css.large}}`
-    const styles = [
-      <Style key='base' css={css.base} />,
-      <Style key='desktop' css={cssLarge} />
-    ]
-
-    return (
-      <Context.Provider value={context}>
-        {styles}
-        {children}
-      </Context.Provider>
-    )
-  }
-}
-
-export const withSidepane = Component => React.forwardRef((props, ref) => (
-  <Context.Consumer
-    children={context => (
-      <Component
-        {...props}
-        {...context}
-        ref={ref}
-      />
-    )}
-  />
-))
-
-const Root = props =>
-  <div
-    {...props}
-    className='sidepane-root'
-  />
-
-const Pane = withSidepane(({
-  paneOpen,
-  togglePane,
-  closePane,
-  openPane,
-  ...props
-}) => (
-  <div
-    {...props}
-    className='sidepane-pane'
-    style={{
-      ...props.style,
-      transform: paneOpen ? null : 'translateX(-100%)'
-    }}
-  />
-))
-
-const Main = props =>
-  <div
-    {...props}
-    className='sidepane-main'
-  />
-
-const Overlay = withSidepane(({
-  paneOpen,
-  togglePane,
-  openPane,
-  closePane,
-  ...props
-}) => paneOpen &&
-  <div
-    {...props}
-    className='sidepane-overlay'
-    onClick={closePane}
-  />
-)
-
-const Spacer = props =>
-  <div
-    {...props}
-    className='sidepane-spacer'
-  />
-
-
-export class Sidepane extends React.Component {
-  render () {
-    const {
-      width = 256,
-      children
-    } = this.props
-    return (
-      <Provider>
-        <Root>
-          <Overlay />
-          <Pane style={{ width }}>
-            Pane tk
-          </Pane>
-          <Spacer style={{ width }} />
-          <Main>
-            {this.props.children}
-          </Main>
-        </Root>
-      </Provider>
-    )
-  }
-}
+export default Sidepane
