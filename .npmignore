@@ -2,3 +2,5 @@ babel.config.js
 src
 test
 docs
+.nyc_output
+coverage

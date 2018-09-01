@@ -1,15 +1,53 @@
 import React from 'react'
-import { Sidepane, withSidepane } from '../src'
+import styled from 'styled-components'
+import Sidepane, { withSidepane } from '../src'
 
 export const Root = props =>
-  <Sidepane
-  >
-    {props.children}
+  <Sidepane>
+    <Sidepane.Bar>
+      <Box>
+        Sidepane.Bar
+        <hr />
+        <a href='https://github.com/jxnblk/sidepane'>GitHub</a>
+      </Box>
+    </Sidepane.Bar>
+    <Sidepane.Main>
+      <Container>
+        {props.children}
+      </Container>
+    </Sidepane.Main>
   </Sidepane>
 
-export const Button = withSidepane(props => (
-  <button onClick={props.togglePane}>
+export const Button = styled(withSidepane(({
+  paneOpen,
+  togglePane,
+  openPane,
+  closePane,
+  ...props
+}) => (
+  <button {...props} onClick={togglePane}>
     {props.children}
-    <code>{props.paneOpen ? 'open' : 'closed'}</code>
   </button>
-))
+)))({
+  '@media screen and (min-width: 32em)': {
+    display: 'none'
+  }
+})
+
+export const Box = props =>
+  <div
+    {...props}
+    style={{
+      padding: 32
+    }}
+  />
+
+export const Container = props =>
+  <div
+    {...props}
+    style={{
+      maxWidth: 768,
+      margin: 'auto',
+      padding: 32
+    }}
+  />
