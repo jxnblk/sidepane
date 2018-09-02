@@ -35,7 +35,8 @@ export class Sidepane extends React.Component {
       breakpoint = '32em',
       onClose,
       render,
-      children
+      children,
+      ...props
     } = this.props
     const context = {
       ...this.state,
@@ -54,7 +55,7 @@ export class Sidepane extends React.Component {
       return (
         <Context.Provider value={context}>
           {styles}
-          <Root>
+          <Root {...props}>
             {render(context)}
           </Root>
         </Context.Provider>
@@ -64,7 +65,7 @@ export class Sidepane extends React.Component {
     return (
       <Context.Provider value={context}>
         {styles}
-        <Root>
+        <Root {...props}>
           {this.props.children}
         </Root>
       </Context.Provider>
