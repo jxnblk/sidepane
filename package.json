@@ -1,6 +1,6 @@
 {
   "name": "sidepane",
-  "version": "1.0.0-2",
+  "version": "1.0.0-3",
   "description": "Responsive React sidebar component",
   "main": "dist/index.js",
   "scripts": {
