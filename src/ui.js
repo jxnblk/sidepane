@@ -18,7 +18,7 @@ export const Pane = withSidepane(({
 }) => (
   <div
     {...props}
-    className={classnames('sidepane-pane', props.className)}
+    className={classnames('sidepane-bar', props.className)}
     style={{
       ...props.style,
       transform: paneOpen ? null : 'translateX(-100%)'

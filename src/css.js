@@ -4,8 +4,8 @@ export default {
   display: flex;
   width: 100%;
 }
-.sidepane-pane {
-  background-color: #eee;
+.sidepane-bar {
+  background-color: #f6f6f6;
   position: fixed;
   top: 0;
   left: 0;
@@ -34,7 +34,7 @@ export default {
 }
 `,
   large: `
-.sidepane-pane {
+.sidepane-bar {
   transform: none !important;
 }
 .sidepane-spacer {
