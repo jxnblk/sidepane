@@ -1,0 +1,78 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders 1`] = `
+Array [
+  <style
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": ".sidepane-spacer { display: none }
+@media screen and (min-width: 40em) {
+.sidepane-root { transform: none !important }
+.sidepane-spacer { display: block }
+}",
+      }
+    }
+  />,
+  <button
+    onClick={[Function]}
+    style={
+      Object {
+        "appearance": "none",
+        "border": 0,
+        "left": 0,
+        "margin": 0,
+        "outline": "none",
+        "padding": "0.5em",
+        "position": "fixed",
+        "top": 0,
+      }
+    }
+    title="Toggle Menu"
+  >
+    <svg
+      height={24}
+      style={
+        Object {
+          "display": "block",
+        }
+      }
+      viewBox="0 0 24 24"
+      width={24}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"
+      />
+    </svg>
+  </button>,
+  <div
+    className="sidepane-spacer"
+    style={
+      Object {
+        "flex": "none",
+        "width": 256,
+      }
+    }
+  />,
+  <div
+    className="sidepane-root"
+    style={
+      Object {
+        "WebkitOverflowScrolling": "touch",
+        "backgroundColor": "white",
+        "bottom": 0,
+        "color": undefined,
+        "left": 0,
+        "overflowY": "auto",
+        "position": "fixed",
+        "top": 0,
+        "transform": "translateX(-100%)",
+        "transitionDuration": ".2s",
+        "transitionProperty": "transform",
+        "transitionTimingFunction": "ease-out",
+        "width": 256,
+      }
+    }
+  />,
+]
+`;

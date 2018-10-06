@@ -1,53 +1,30 @@
 import React from 'react'
 import styled from 'styled-components'
-import Sidepane, { withSidepane } from '../src'
+import { Flex, Box } from '@rebass/grid'
+import Sidepane from '../src'
 
 export const Root = props =>
-  <Sidepane>
-    <Sidepane.Bar>
+  <Flex>
+    <Sidepane
+      bg='#f6f6ff'>
       <Box>
         Sidepane.Bar
         <hr />
         <a href='https://github.com/jxnblk/sidepane'>GitHub</a>
       </Box>
-    </Sidepane.Bar>
-    <Sidepane.Main>
-      <Container>
-        {props.children}
-      </Container>
-    </Sidepane.Main>
-  </Sidepane>
-
-export const Button = styled(withSidepane(({
-  paneOpen,
-  togglePane,
-  openPane,
-  closePane,
-  ...props
-}) => (
-  <button {...props} onClick={togglePane}>
-    {props.children}
-  </button>
-)))({
-  '@media screen and (min-width: 32em)': {
-    display: 'none'
-  }
-})
-
-export const Box = props =>
-  <div
-    {...props}
-    style={{
-      padding: 32
-    }}
-  />
+    </Sidepane>
+    <Container>
+      {props.children}
+    </Container>
+  </Flex>
 
 export const Container = props =>
-  <div
+  <Box
     {...props}
-    style={{
-      maxWidth: 768,
-      margin: 'auto',
-      padding: 32
+    width={1}
+    p={4}
+    mx='auto'
+    css={{
+      maxWidth: '768px',
     }}
   />
