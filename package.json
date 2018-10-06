@@ -5,8 +5,8 @@
   "main": "dist/index.js",
   "scripts": {
     "prepare": "babel src -d dist",
-    "start": "mdx-go docs",
-    "test": "nyc ava"
+    "start": "npx superdev docs",
+    "test": "jest"
   },
   "keywords": [],
   "author": "Brent Jackson",
@@ -17,20 +17,16 @@
     "@babel/plugin-proposal-class-properties": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
-    "@babel/register": "^7.0.0",
-    "ava": "^0.25.0",
-    "grid-styled": "^5.0.2",
+    "@rebass/grid": "^6.0.0-4",
+    "babel-core": "^7.0.0-bridge.0",
     "jest": "^23.5.0",
-    "mdx-go": "^1.0.7",
-    "nyc": "^13.0.1",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
-    "react-test-renderer": "^16.4.2",
-    "styled-components": "^3.4.5"
+    "react-test-renderer": "^16.4.2"
   },
-  "ava": {
-    "require": [
-      "@babel/register"
+  "jest": {
+    "testMatch": [
+      "<rootDir>/test/*.js"
     ]
   }
 }

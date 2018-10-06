@@ -1,49 +1,6 @@
-import { Button } from './components'
+import Readme from '../README.md'
 export { Root } from './components'
 
-<Button>Toggle Menu</Button>
+<Readme />
 
-# Sidepane
 
-Responsive React sidebar component
-
-```sh
-npm i sidepane
-```
-
-```jsx
-import React from 'react'
-import Sidepane from 'sidepane'
-
-export default props =>
-  <Sidepane>
-    <Sidepane.Bar>
-      This is sidebar content
-    </Sidepane.Bar>
-    <Sidepane.Main>
-      This is the main content
-    </Sidepane.Main>
-  </Sidepane>
-```
-
-```jsx
-import React from 'react'
-import Sidepane from 'sidepane'
-
-export default props =>
-  <Sidepane
-    render={(pane) => (
-      <React.Fragment>
-        <Sidepane.Bar>
-          Sidebar
-        </Sidepane.Bar>
-        <Sidepane.Main>
-          Main content
-          <button onClick={e => pane.toggle()}>
-            Toggle Menu
-          </button>
-        </Sidepane.Main>
-      </React.Fragment>
-    )}
-  />
-```
