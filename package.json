@@ -11,6 +11,7 @@
   "keywords": [],
   "author": "Brent Jackson",
   "license": "MIT",
+  "repository": "jxnblk/sidepane",
   "devDependencies": {
     "@babel/cli": "^7.0.0",
     "@babel/core": "^7.0.0",
